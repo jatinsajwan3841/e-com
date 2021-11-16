@@ -8,7 +8,7 @@ const sendToken = (user, statusCode, res) => {
         sameSite: false,
         secure: true,
         httpOnly: true,
-        domain: process.env.CORES_ORIGIN,
+        domain: `.${process.env.CORES_ORIGIN.substr(7)}`,
     };
 
     res.status(statusCode).cookie("token", token, options).json({
