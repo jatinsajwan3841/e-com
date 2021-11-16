@@ -1,5 +1,6 @@
 const app = require("./app");
 const dotenv = require("dotenv");
+const cloudinary = require("cloudinary");
 const connectDB = require("./config/database");
 
 // handle uncaughtException
@@ -14,6 +15,12 @@ dotenv.config({ path: "./config/config.env" });
 
 //db connect
 connectDB();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // handle unhandled Promise exception
 process.on("unhandledRejection", (err) => {

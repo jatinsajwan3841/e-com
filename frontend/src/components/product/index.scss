@@ -1,0 +1,120 @@
+.product-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    .product-image-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        min-width: 240px;
+        margin: 0 10px;
+        .product-image {
+            min-width: 240px;
+            width: 40%;
+            aspect-ratio: 1;
+        }
+    }
+
+    .product-details {
+        display: flex;
+        width: 50%;
+        flex-direction: column;
+        .details {
+            border-bottom: 2px dashed grey;
+            padding: 10px 0;
+            .product-name {
+                font-size: 30px;
+                font-weight: bold;
+            }
+            .product-id {
+                font-size: small;
+                color: grey;
+            }
+            .amount {
+                font-size: 30px;
+                font-weight: bold;
+                color: rgb(75, 73, 73);
+            }
+            .order-count {
+                display: flex;
+                flex-direction: row;
+                margin: 10px 0;
+                align-items: center;
+                width: max-content;
+                button {
+                    cursor: pointer;
+                    border: none;
+                    border-radius: 5px;
+                    color: white;
+                    padding: 10px;
+                    margin: 0 10px;
+                    background-color: grey;
+                    &:disabled {
+                        color: rgb(68, 68, 68);
+                    }
+                }
+                .add-to-cart {
+                    background-color: tomato;
+                }
+            }
+            .green {
+                color: rgba(0, 163, 0, 0.8);
+            }
+            .tomato {
+                color: tomato;
+            }
+        }
+    }
+}
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    .head {
+        border-bottom: 2px dashed grey;
+        margin: 10px 0;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 33px;
+        font-weight: bold;
+        color: rgb(75, 73, 73);
+        width: 30%;
+        align-self: center;
+    }
+    .reviews {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        .review {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            margin: 10px;
+            padding: 30px;
+            min-width: 200px;
+            min-height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px grey;
+            .name {
+                font-size: 18px;
+                font-weight: bold;
+                .avatar {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .comment {
+                font-size: 15px;
+            }
+        }
+        .no-reviews {
+            margin: 10px;
+            color: grey;
+            font-size: large;
+        }
+    }
+}

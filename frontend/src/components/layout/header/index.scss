@@ -1,0 +1,107 @@
+.header-container {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    top: 0;
+    padding: 10px;
+    height: 40px;
+    margin: 0;
+    color: white;
+    z-index: 150;
+    background-color: #0f1111;
+    box-shadow: 0 0 30px rgba(165, 165, 165, 0.7);
+    .logo {
+        display: flex;
+        flex-grow: 1;
+        color: white;
+        text-decoration: none;
+        .text {
+            font-size: 22px;
+            padding-left: 5px;
+            font-weight: bold;
+        }
+    }
+    .right {
+        display: flex;
+        flex-direction: row;
+        float: right;
+        a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            &:visited {
+                color: white;
+                text-decoration: none;
+            }
+            &.active {
+                color: red;
+            }
+        }
+        .avatar {
+            position: relative;
+            height: 25px;
+            width: 25px;
+            margin: auto;
+            border-radius: 50%;
+            background-color: rgb(160, 160, 160);
+            cursor: pointer;
+            .dp {
+                position: absolute;
+                z-index: 20;
+                height: 25px;
+                width: 25px;
+                margin: auto;
+                border-radius: 50%;
+            }
+            .hidden {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 20px;
+                border-radius: 10%;
+                list-style: none;
+                top: 5px;
+                left: -35px;
+                margin: auto;
+                background: rgba(0, 0, 0, 0.5);
+                transition: all 0.8ms ease;
+                transform: scaleY(0);
+                cursor: pointer;
+                &.options {
+                    transform: scaleY(1);
+                }
+            }
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 2px;
+                left: 7.3px;
+                height: 10px;
+                width: 10px;
+                background-color: grey;
+                clip-path: circle(50% at 50% 50%);
+            }
+            &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                bottom: 3px;
+                left: 5px;
+                height: 13px;
+                width: 15px;
+                background-color: grey;
+                clip-path: polygon(
+                    50% 0%,
+                    100% 38%,
+                    82% 100%,
+                    18% 100%,
+                    0% 38%
+                );
+            }
+        }
+    }
+}

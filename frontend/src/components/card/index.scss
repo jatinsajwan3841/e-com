@@ -1,0 +1,44 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    margin: 10px;
+    width: clamp(200px, 15vw, 100vw);
+    //max-width: 320px;
+    color: black;
+    text-decoration: none;
+    border-radius: 5%;
+    background: rgba(165, 165, 165, 0.1);
+    box-shadow: 0 0 30px rgba(165, 165, 165, 0.6);
+    transition: all 0.5s ease;
+    img {
+        aspect-ratio: 1;
+    }
+    .star-rev {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        span:last-child {
+            margin: 0 0 0 10px;
+        }
+    }
+    .price {
+        color: tomato;
+    }
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(165, 165, 165, 0.6);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .card-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .card-container {
+        width: 40%;
+    }
+}

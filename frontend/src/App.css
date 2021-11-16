@@ -1,0 +1,40 @@
+* {
+    /* firefox */
+    scrollbar-color: rgb(255, 99, 71) rgb(128, 128, 128);
+    scrollbar-width: thin;
+}
+
+body {
+    margin: 0;
+}
+.app {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    min-height: 100vh;
+}
+
+.app .content {
+    flex-grow: 1;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(255, 99, 71);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(255, 58, 23);
+}

@@ -1,0 +1,20 @@
+.alert-container {
+    position: fixed;
+    bottom: 25px;
+    left: -50vw;
+    height: max-content;
+    padding: 5px 25px;
+    z-index: 100;
+    background-color: tomato;
+    border-radius: 20px;
+    transition: all ease 0.5s;
+    z-index: 1000;
+    &.show {
+        left: 15px;
+    }
+    .alert {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+}

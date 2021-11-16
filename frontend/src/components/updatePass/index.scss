@@ -1,0 +1,103 @@
+.updatePass-holder {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    color: white;
+    .pass-container {
+        width: 55vw;
+        margin: 20px auto;
+        z-index: 110;
+        padding: 15px;
+        border-radius: 20px;
+        border: 1px dashed white;
+        color: black;
+        background-color: rgba(255, 255, 255, 0.9);
+        overflow-y: auto;
+        .inp-content {
+            position: relative;
+            width: 100%;
+            margin: 5px 0;
+            z-index: 10;
+            .label {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                font-size: smaller;
+                color: grey;
+            }
+            .placeholder {
+                position: absolute;
+                top: 23px;
+                left: 5px;
+                color: grey;
+                z-index: -1;
+                transition: all 200ms ease-in-out;
+            }
+            .border-bottom {
+                position: absolute;
+                left: 0;
+                bottom: 20px;
+                margin: auto;
+                display: block;
+                height: 2px;
+                width: 0px;
+                border: none;
+                background: transparent;
+                transition: width 0.5s ease, background-color 0.5s ease;
+            }
+            input {
+                margin: 20px 0;
+                border: 0;
+                height: 30px;
+                width: 100%;
+                color: inherit;
+                background: transparent;
+                box-sizing: border-box;
+                border-bottom: 1px solid black;
+                transition: border-bottom 50ms ease;
+                &:focus {
+                    outline: none;
+                    & + .border-bottom {
+                        width: 100%;
+                        background: blue;
+                        & + .placeholder {
+                            top: 3px;
+                            left: 0px;
+                            font-size: small;
+                        }
+                    }
+                }
+                &:hover {
+                    border-bottom: 2px solid black;
+                }
+                &:not(:placeholder-shown) {
+                    &:invalid {
+                        & + .border-bottom {
+                            width: 100%;
+                            background: red;
+                        }
+                    }
+                    & ~ .placeholder {
+                        top: 3px;
+                        left: 0px;
+                        font-size: small;
+                    }
+                }
+            }
+        }
+        .btn {
+            margin: 10px 20vw;
+            padding: 10px;
+            width: max-content;
+            border: none;
+            border-radius: 10px;
+            background-color: rgb(92, 92, 240);
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+}

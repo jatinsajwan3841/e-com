@@ -1,0 +1,112 @@
+.forget-pass-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 10px 30px 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px grey;
+    .start {
+        text-align: center;
+        margin: 20px 0 0 0;
+        position: relative;
+        border-radius: 35%;
+        border-bottom: 1px dashed grey;
+    }
+    .inp-content {
+        position: relative;
+        width: 100%;
+        margin: 5px 0;
+        z-index: 10;
+        .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: smaller;
+            color: grey;
+        }
+        .placeholder {
+            position: absolute;
+            top: 23px;
+            left: 5px;
+            color: grey;
+            z-index: -1;
+            transition: all 200ms ease-in-out;
+        }
+        .border-bottom {
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+            margin: auto;
+            display: block;
+            height: 2px;
+            width: 0px;
+            border: none;
+            background: transparent;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+        input {
+            margin: 20px 0;
+            border: 0;
+            height: 30px;
+            width: 100%;
+            color: inherit;
+            background: transparent;
+            box-sizing: border-box;
+            border-bottom: 1px solid black;
+            transition: border-bottom 50ms ease;
+            &:focus {
+                outline: none;
+                & + .border-bottom {
+                    width: 100%;
+                    background: blue;
+                    & + .placeholder {
+                        top: 3px;
+                        left: 0px;
+                        font-size: small;
+                    }
+                }
+            }
+            &:hover {
+                border-bottom: 2px solid black;
+            }
+            &:not(:placeholder-shown) {
+                &:invalid {
+                    & + .border-bottom {
+                        width: 100%;
+                        background: red;
+                    }
+                }
+                & ~ .placeholder {
+                    top: 3px;
+                    left: 0px;
+                    font-size: small;
+                }
+            }
+        }
+    }
+    .form-button {
+        position: relative;
+        border: none;
+        color: white;
+        font-size: medium;
+        background-color: rgba(255, 0, 0, 0.7);
+        cursor: pointer;
+        padding: 10px;
+        margin: 10px auto 0px auto;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 3px grey;
+        &:hover {
+            box-shadow: 0 0 7px grey;
+        }
+    }
+}
+
+@media only screen and (max-width: 538px) {
+    .forget-pass-container {
+        margin: 0 auto;
+        box-shadow: none;
+    }
+}

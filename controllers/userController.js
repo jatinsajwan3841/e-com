@@ -4,17 +4,23 @@ const asyncErrorHandle = require("../middleware/asyncError");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 // registration
 exports.registerUser = asyncErrorHandle(async (req, res, next) => {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.dp, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+    });
     const { name, email, password } = req.body;
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "sample",
-            url: "sample",
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         },
     });
     sendToken(user, 201, res);
@@ -30,7 +36,7 @@ exports.loginUser = asyncErrorHandle(async (req, res, next) => {
     if (!user) {
         return next(new ErrorHandler("Invalid email or password", 401));
     }
-    const isPassMatched = user.comparePassword(password);
+    const isPassMatched = await user.comparePassword(password);
     if (!isPassMatched) {
         return next(new ErrorHandler("Invalid email or password", 401));
     }
@@ -56,9 +62,7 @@ exports.forgotPassword = asyncErrorHandle(async (req, res, next) => {
     const resetToken = user.getResetPassToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetPassUrl = `${req.protocol}://${req.get(
-        "host"
-    )}/api/v1/password/reset/${resetToken}`;
+    const resetPassUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
     const message = `Click on the following link to reset your password :- \n\n ${resetPassUrl} If you have not requested this email then, please ignore it.`;
 
     try {
@@ -119,15 +123,15 @@ exports.getUserDetails = asyncErrorHandle(async (req, res, next) => {
 
 // update userPass
 exports.updatePassword = asyncErrorHandle(async (req, res, next) => {
-    const user = await user.findById(req.user.id).select("+password");
-    const isPassMatched = user.comparePassword(req.body.oldPassword);
+    const user = await User.findById(req.user.id).select("+password");
+    const isPassMatched = await user.comparePassword(req.body.oldPassword);
     if (!isPassMatched) {
         return next(new ErrorHandler("Old password is incorrect", 400));
     }
     if (req.body.newPassword !== req.body.confirmPassword) {
         return next(new ErrorHandler("Password not matched", 400));
     }
-    user.password = req.body.password;
+    user.password = req.body.newPassword;
     await user.save();
     sendToken(user, 200, res);
 });
@@ -138,7 +142,20 @@ exports.updateProfile = asyncErrorHandle(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
     };
-    // todo include avatar update
+    if (req.body.dp) {
+        const user = await User.findById(req.user.id);
+        const image_id = user.avatar.public_id;
+        await cloudinary.v2.uploader.destroy(image_id);
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.dp, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale",
+        });
+        newData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        };
+    }
 
     const user = await User.findByIdAndUpdate(req.user.id, newData, {
         new: true,
