@@ -50,7 +50,6 @@ exports.logOutUser = asyncErrorHandle(async (req, res, next) => {
         sameSite: "None",
         secure: true,
         httpOnly: true,
-        domain: `.${process.env.CORES_ORIGIN.substr(8)}`,
     });
     res.status(200).json({ success: true, message: "logged out" });
 });
