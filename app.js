@@ -21,6 +21,7 @@ app.use(fileUpload());
 const corsOptions = {
     origin: process.env.CORES_ORIGIN,
     optionsSuccessStatus: 200,
+    credentials: true,
 };
 app.use(cors(corsOptions));
 app.options("*", cors());
