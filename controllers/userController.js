@@ -47,7 +47,7 @@ exports.loginUser = asyncErrorHandle(async (req, res, next) => {
 exports.logOutUser = asyncErrorHandle(async (req, res, next) => {
     res.cookie("token", null, {
         expires: new Date(Date.now()),
-        sameSite: false,
+        sameSite: "None",
         secure: true,
         httpOnly: true,
         domain: `.${process.env.CORES_ORIGIN.substr(8)}`,
