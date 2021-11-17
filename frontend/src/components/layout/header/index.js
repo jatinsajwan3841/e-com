@@ -38,6 +38,7 @@ const Header = () => {
                                     <Link to="/dashboard">Dashboard</Link>
                                 )}
                                 <Link to="/profile">Profile</Link>
+                                <Link to="/cart">Cart</Link>
                                 <span onClick={() => dispatch(logout())}>
                                     Log Out
                                 </span>

@@ -7,6 +7,8 @@ const Login = React.lazy(() => import("./components/login"));
 const Profile = React.lazy(() => import("./components/profile"));
 const ForgotPass = React.lazy(() => import("./components/forgotPass"));
 const ResetPass = React.lazy(() => import("./components/resetPass"));
+const Cart = React.lazy(() => import("./components/cart"));
+const Shipping = React.lazy(() => import("./components/shipping"));
 
 const routes = [
     {
@@ -56,6 +58,18 @@ const routes = [
         name: "Profile",
         secure: false,
         element: ResetPass,
+    },
+    {
+        path: "/cart",
+        name: "Cart",
+        secure: false,
+        element: Cart,
+    },
+    {
+        path: "/shipping",
+        name: "Shipping",
+        secure: true,
+        element: Shipping,
     },
 ];
 

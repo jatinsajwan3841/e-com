@@ -17,30 +17,22 @@ function App() {
         store.dispatch(loadUser());
     }, []);
 
-    const menu = routes.map((route, index) => {
-        if (route.secure)
-            return (
-                <Route
-                    key={index}
-                    path={route.path}
-                    name={route.name}
-                    element={
-                        <SecureRoute>
-                            <route.element />
-                        </SecureRoute>
-                    }
-                ></Route>
-            );
-        else
-            return (
-                <Route
-                    key={index}
-                    path={route.path}
-                    name={route.name}
-                    element={<route.element />}
-                />
-            );
-    });
+    const menu = routes.map((route, index) => (
+        <Route
+            key={index}
+            path={route.path}
+            name={route.name}
+            element={
+                route.secure ? (
+                    <SecureRoute>
+                        <route.element />
+                    </SecureRoute>
+                ) : (
+                    <route.element />
+                )
+            }
+        />
+    ));
     return (
         <Suspense fallback={<Loader />}>
             <div className="app">
@@ -49,7 +41,6 @@ function App() {
                 <Loading />
                 <div className="content">
                     <Routes>
-                        {" "}
                         {menu}
                         <Route path="*" element={<NoMatch />} />
                     </Routes>

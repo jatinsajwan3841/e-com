@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, register } from "../../actions/userAction";
 import "./index.scss";
@@ -8,6 +8,7 @@ const Login = () => {
     const [loginSelect, setLogin] = React.useState(true);
     const [dp, setDp] = React.useState();
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector((state) => state.user);
     const handleSubmit = async (e) => {
@@ -39,10 +40,12 @@ const Login = () => {
             alert("please choose file of size less than 2MB!");
         }
     };
-
+    const redirect = location.search
+        ? location.search.split("=")[1]
+        : "/profile";
     React.useEffect(() => {
         if (isAuthenticated) {
-            navigate("/profile");
+            navigate(redirect, { replace: true });
         }
     }, [isAuthenticated]);
     return (

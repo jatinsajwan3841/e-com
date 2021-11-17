@@ -1,17 +1,17 @@
 .header-container {
     position: sticky;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row wrap;
     align-items: center;
     top: 0;
     padding: 10px;
-    height: 40px;
+    min-height: 40px;
+    height: max-content;
     margin: 0;
     color: white;
     z-index: 150;
-    background-color: #0f1111;
-    box-shadow: 0 0 30px rgba(165, 165, 165, 0.7);
+    background-color: blueviolet;
+    box-shadow: 0 0 20px blueviolet;
     .logo {
         display: flex;
         flex-grow: 1;
@@ -25,7 +25,7 @@
     }
     .right {
         display: flex;
-        flex-direction: row;
+        flex-flow: row wrap;
         float: right;
         a {
             color: white;
@@ -60,18 +60,22 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding-top: 20px;
+                padding: 10px 0;
                 border-radius: 10%;
                 list-style: none;
-                top: 5px;
-                left: -35px;
+                top: 25px;
+                left: -60px;
                 margin: auto;
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.9);
                 transition: all 0.8ms ease;
                 transform: scaleY(0);
-                cursor: pointer;
                 &.options {
                     transform: scaleY(1);
+                }
+                & > * {
+                    margin-bottom: 5px;
+                    border-bottom: 2px dashed grey;
+                    cursor: pointer;
                 }
             }
             &::before {
@@ -102,6 +106,26 @@
                     0% 38%
                 );
             }
+        }
+    }
+}
+
+/* Medium screens */
+@media all and (max-width: 800px) {
+    .header-container {
+        justify-content: space-around;
+    }
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+    .header-container {
+        .logo {
+            flex-grow: unset;
+        }
+        .right {
+            float: unset;
+            margin-top: 10px;
         }
     }
 }

@@ -5,12 +5,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import "./index.scss";
+import { addItemsToCart } from "../../actions/cartActions";
 
 const Product = () => {
     const [count, setCount] = React.useState(0);
     const dispatch = useDispatch();
     const params = useParams();
     const { product } = useSelector((state) => state.productDetails);
+
+    const cartHandler = () => {
+        if (count) {
+            dispatch(addItemsToCart(product, count));
+        }
+    };
+
     React.useEffect(() => {
         dispatch(getProductDetails(params.id));
     }, [dispatch, params.id]);
@@ -70,6 +78,7 @@ const Product = () => {
                                     <button
                                         className="add-to-cart"
                                         disabled={count === 0}
+                                        onClick={cartHandler}
                                     >
                                         Add to cart
                                     </button>

@@ -16,6 +16,7 @@ const ResetPass = () => {
         const confirmPassword = e.target.confirmPassword.value;
         if (password !== confirmPassword) {
             alert("Password did not match!");
+            return;
         }
         dispatch(
             resetPassword(token, {
