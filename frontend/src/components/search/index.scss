@@ -92,3 +92,15 @@
         }
     }
 }
+
+@media screen and (max-width: 550px) {
+    .search-container {
+        flex-direction: column;
+        .inp-content {
+            width: 80%;
+        }
+        .form-button {
+            margin: 10px;
+        }
+    }
+}

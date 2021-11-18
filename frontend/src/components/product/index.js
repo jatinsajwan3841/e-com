@@ -98,13 +98,13 @@ const Product = () => {
                         </div>
                     </div>
                     <div className="reviews-container">
-                        <div className="head">Reviews</div>
+                        <div className="head">Reviews ●'◡'●</div>
                         <div className="reviews">
                             {product.numOfReviews > 0 ? (
                                 product.reviews.map((val, key) => (
                                     <div key={key} className="review">
                                         <div className="name">
-                                            <span className="avatar">😃</span>
+                                            <span className="avatar"> </span>
                                             {val.name}
                                         </div>
                                         <div>

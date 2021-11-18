@@ -29,6 +29,7 @@
                 height: 80px;
                 width: 80px;
                 margin-right: 10px;
+                object-fit: scale-down;
             }
             .upload {
                 position: absolute;
@@ -195,6 +196,15 @@
                     }
                 }
             }
+        }
+    }
+}
+
+/* Small screens */
+@media all and (max-width: 768px) {
+    .profile-container {
+        .left {
+            width: 100%;
         }
     }
 }

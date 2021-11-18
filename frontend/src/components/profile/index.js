@@ -116,7 +116,7 @@ const Profile = () => {
                     className="details-holder"
                 >
                     <center className="details-header">
-                        Hey! We took care of what you shared with us!
+                        Hey! Here's what you shared with us!
                     </center>
                     <div className="inp-content">
                         <label htmlFor="name" className="label">

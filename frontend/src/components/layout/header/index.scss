@@ -8,6 +8,7 @@
     min-height: 40px;
     height: max-content;
     margin: 0;
+    font-size: 18px;
     color: white;
     z-index: 150;
     background-color: blueviolet;
@@ -31,18 +32,22 @@
             color: white;
             text-decoration: none;
             margin: 0 10px;
+            padding-bottom: 2px;
+            border-bottom: 0px inset greenyellow;
+            transition: border-bottom 0.1s ease;
             &:visited {
                 color: white;
                 text-decoration: none;
             }
             &.active {
-                color: red;
+                color: greenyellow;
+                border-bottom: 2px inset greenyellow;
             }
         }
         .avatar {
             position: relative;
-            height: 25px;
-            width: 25px;
+            height: 30px;
+            width: 30px;
             margin: auto;
             border-radius: 50%;
             background-color: rgb(160, 160, 160);
@@ -50,10 +55,11 @@
             .dp {
                 position: absolute;
                 z-index: 20;
-                height: 25px;
-                width: 25px;
+                height: 30px;
+                width: 30px;
                 margin: auto;
                 border-radius: 50%;
+                object-fit: scale-down;
             }
             .hidden {
                 position: absolute;
@@ -63,11 +69,12 @@
                 padding: 10px 0;
                 border-radius: 10%;
                 list-style: none;
-                top: 25px;
+                top: 35px;
                 left: -60px;
+                min-width: 91px;
                 margin: auto;
                 background: rgba(0, 0, 0, 0.9);
-                transition: all 0.8ms ease;
+                transition: all 0.1s ease;
                 transform: scaleY(0);
                 &.options {
                     transform: scaleY(1);
@@ -76,6 +83,22 @@
                     margin-bottom: 5px;
                     border-bottom: 2px dashed grey;
                     cursor: pointer;
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: -5px;
+                    right: 5px;
+                    height: 20px;
+                    width: 20px;
+                    background: rgba(0, 0, 0, 0.9);
+                    clip-path: polygon(
+                        50% 0%,
+                        100% 38%,
+                        82% 100%,
+                        18% 100%,
+                        0% 38%
+                    );
                 }
             }
             &::before {
