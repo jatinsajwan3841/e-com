@@ -41,7 +41,7 @@ const Cart = () => {
                             </span>
                         </span>
                     </div>
-                    <Link to="/login?redirect=/shipping" className="cart-item">
+                    <Link to="/login?redirect=/check-out" className="cart-item">
                         <button type="button" className="checkout">
                             Check Out
                         </button>

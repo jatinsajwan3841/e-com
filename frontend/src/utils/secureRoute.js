@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ const SecureRoute = ({ children }) => {
         if (!loading && !isAuthenticated) {
             navigate("/login");
         }
-    }, [loading, isAuthenticated]);
+    }, [loading, isAuthenticated, navigate]);
 
     return <>{!loading && isAuthenticated && children}</>;
 };

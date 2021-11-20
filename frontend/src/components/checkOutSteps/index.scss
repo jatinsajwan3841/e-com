@@ -1,0 +1,22 @@
+.check-out {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    transform: all 1s ease;
+    .cont-btns {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+        .continue {
+            border: 0;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            color: white;
+            background-color: tomato;
+            box-shadow: 0 0 5px tomato;
+            cursor: pointer;
+        }
+    }
+}

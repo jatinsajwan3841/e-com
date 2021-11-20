@@ -11,6 +11,7 @@ const Alert = () => {
         (state) => state.productDetails.error
     );
     const forgotPass = useSelector((state) => state.forgotPassword);
+    const newOrderError = useSelector((state) => state.newOrder.error);
 
     const timer = React.useRef();
 
@@ -22,7 +23,7 @@ const Alert = () => {
                 setShowAlert(false);
             }, 4000);
         }
-    }, [userError]);
+    }, [userError, dispatch]);
     React.useEffect(() => {
         if (profileError) {
             setShowAlert(profileError);
@@ -31,7 +32,7 @@ const Alert = () => {
                 setShowAlert(false);
             }, 4000);
         }
-    }, [profileError]);
+    }, [profileError, dispatch]);
     React.useEffect(() => {
         if (productsError) {
             setShowAlert(productsError);
@@ -40,7 +41,7 @@ const Alert = () => {
                 setShowAlert(false);
             }, 4000);
         }
-    }, [productsError]);
+    }, [productsError, dispatch]);
     React.useEffect(() => {
         if (productDetailsError) {
             setShowAlert(productDetailsError);
@@ -49,7 +50,7 @@ const Alert = () => {
                 setShowAlert(false);
             }, 4000);
         }
-    }, [productDetailsError]);
+    }, [productDetailsError, dispatch]);
     React.useEffect(() => {
         if (forgotPass.error || forgotPass.message) {
             setShowAlert(forgotPass.error || forgotPass.message);
@@ -58,7 +59,16 @@ const Alert = () => {
                 setShowAlert(false);
             }, 4000);
         }
-    }, [forgotPass.error, forgotPass.message]);
+    }, [forgotPass.error, forgotPass.message, dispatch]);
+    React.useEffect(() => {
+        if (newOrderError) {
+            setShowAlert(newOrderError);
+            dispatch({ type: "CLEAR_ERRORS" });
+            timer.current = setTimeout(() => {
+                setShowAlert(false);
+            }, 4000);
+        }
+    }, [newOrderError, dispatch]);
 
     React.useEffect(() => {
         timer.current = setTimeout(() => {

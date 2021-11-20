@@ -11,12 +11,12 @@ const CartItem = ({ prod }) => {
         if (count !== prod.quantity) {
             dispatch(addItemsToCart(prod, count));
         }
-    }, [count]);
+    }, [count, dispatch, prod]);
 
     return (
         <div className="cart-item">
             <span className="prod">
-                <img src={prod.image} className="prod-img" />
+                <img src={prod.image} className="prod-img" alt={prod.name} />
                 <span className="prod-details">
                     <span className="prod-name">{prod.name}</span>
                     <span>

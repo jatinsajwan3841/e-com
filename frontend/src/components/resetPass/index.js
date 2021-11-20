@@ -30,7 +30,7 @@ const ResetPass = () => {
             alert("password updated successfully");
             navigate("/login");
         }
-    }, [success]);
+    }, [success, navigate]);
     return (
         <div className="reset-pass-container">
             <form onSubmit={handlePassResetSubmit}>

@@ -58,30 +58,36 @@ const orderSchema = mongoose.Schema({
         required: true,
     },
     paymentInfo: {
-        id: {
+        txn_id: {
             type: String,
             required: true,
         },
-        status: {
+        txnStatus: {
             type: String,
             required: true,
         },
+        txnDate: {
+            type: Date,
+            required: true,
+        },
+        gatewayName: {
+            type: String,
+        },
+        txnMode: {
+            type: String,
+        },
     },
-    paidAt: {
-        type: Date,
-        required: true,
-    },
-    itemsPrice: {
+    subtotal: {
         type: Number,
         default: 0,
         required: true,
     },
-    taxPrice: {
+    tax: {
         type: Number,
         default: 0,
         required: true,
     },
-    shippingPrice: {
+    shippingCharges: {
         type: Number,
         default: 0,
         required: true,

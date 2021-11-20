@@ -54,7 +54,7 @@ const Profile = () => {
             navigate("/profile");
             dispatch({ type: "UPDATE_PROFILE_RESET" });
         }
-    }, [isUpdated]);
+    }, [isUpdated, dispatch, navigate]);
 
     return (
         <>

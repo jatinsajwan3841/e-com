@@ -1,5 +1,4 @@
-import axios from "../utils/axiosConfig";
-
+// add items to cart
 export const addItemsToCart = (product, quantity) => (dispatch, getState) => {
     dispatch({
         type: "ADD_TO_CART",
@@ -17,6 +16,8 @@ export const addItemsToCart = (product, quantity) => (dispatch, getState) => {
         JSON.stringify(getState().cart.cartItems)
     );
 };
+
+// remove cart item
 export const removeCartItem = (prod_id) => (dispatch, getState) => {
     dispatch({
         type: "REMOVE_CART_ITEM",
@@ -28,6 +29,7 @@ export const removeCartItem = (prod_id) => (dispatch, getState) => {
     );
 };
 
+// save shiiping info
 export const saveShippingInfo = (data) => async (dispatch) => {
     dispatch({
         type: "SAVE_SHIPPING_INFO",

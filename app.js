@@ -6,6 +6,7 @@ const cors = require("cors");
 const product = require("./routes/productRoute");
 const user = require("./routes/userRoutes");
 const order = require("./routes/orderRoutes");
+const tranx = require("./routes/tranxRoutes");
 const app = express();
 
 app.use(
@@ -30,6 +31,7 @@ app.options("*", cors());
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
+app.use("/api/v1", tranx);
 
 //middleware
 app.use(errorMiddleware);

@@ -3,7 +3,7 @@ import Card from "../card";
 import MetaData from "../../utils/metaData";
 import { getProduct } from "../../actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Search from "../search";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider";
@@ -26,7 +26,7 @@ const Products = () => {
         dispatch(
             getProduct(params.keyword, currentPage, price, category, ratings)
         );
-    }, [dispatch, params, currentPage, applyFilter]);
+    }, [dispatch, params, currentPage, applyFilter, price, category, ratings]);
 
     return (
         <div className="products-container">

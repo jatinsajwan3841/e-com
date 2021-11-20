@@ -11,6 +11,7 @@ const Loading = () => {
         (state) => state.productDetails.loading
     );
     const forgotPassLoad = useSelector((state) => state.forgotPassword.loading);
+    const newOrderLoad = useSelector((state) => state.newOrder.loading);
 
     React.useEffect(() => {
         if (
@@ -18,7 +19,8 @@ const Loading = () => {
             profileLoad ||
             productsLoad ||
             productDetailsLoad ||
-            forgotPassLoad
+            forgotPassLoad ||
+            newOrderLoad
         ) {
             setLoading(true);
         } else {
@@ -30,6 +32,7 @@ const Loading = () => {
         productsLoad,
         productDetailsLoad,
         forgotPassLoad,
+        newOrderLoad,
     ]);
 
     return (

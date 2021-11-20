@@ -47,7 +47,7 @@ const Login = () => {
         if (isAuthenticated) {
             navigate(redirect, { replace: true });
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate, redirect]);
     return (
         <div className="login-container">
             <div className="switch-tabs">

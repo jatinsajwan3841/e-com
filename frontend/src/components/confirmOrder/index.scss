@@ -1,0 +1,110 @@
+.confirm-container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 99vw;
+    padding: 10px;
+    box-sizing: border-box;
+    .title {
+        font-size: 28px;
+        font-weight: bolder;
+        border-bottom: 2px dashed grey;
+    }
+    .left {
+        margin: 10px 0;
+        padding: 10px;
+        min-width: 60%;
+        border-right: 2px dashed grey;
+        box-sizing: border-box;
+        .shipping-info-box {
+            display: flex;
+            flex-flow: column wrap;
+        }
+        .shipping-info-item {
+            p {
+                margin: 10px;
+                font-weight: bolder;
+            }
+            span {
+                color: grey;
+                font-weight: normal;
+            }
+        }
+        .cart-items-container {
+            display: flex;
+            flex-flow: column wrap;
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            .cart-items {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: space-between;
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 0 5px grey;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                img {
+                    width: 100px;
+                }
+            }
+        }
+    }
+    .right {
+        margin: auto;
+        min-width: 40%;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 5px;
+        box-sizing: border-box;
+        .order-summary {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .total {
+            border-top: 2px dashed tomato;
+            color: green;
+            span {
+                color: green;
+            }
+        }
+        p {
+            margin: 10px;
+            font-weight: bolder;
+            justify-content: space-between;
+        }
+        span {
+            margin: 10px;
+            color: grey;
+            font-weight: normal;
+        }
+        .proceed {
+            border: none;
+            padding: 15px;
+            background-color: tomato;
+            box-shadow: 0 0 5px tomato;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .confirm-container {
+        .left {
+            min-width: 100%;
+            border: none;
+        }
+        .right {
+            min-width: 100%;
+        }
+    }
+}
