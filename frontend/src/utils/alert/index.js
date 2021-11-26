@@ -12,6 +12,10 @@ const Alert = () => {
     );
     const forgotPass = useSelector((state) => state.forgotPassword);
     const newOrderError = useSelector((state) => state.newOrder.error);
+    const myOrdersError = useSelector((state) => state.myOrders.error);
+    const orderDetailsError = useSelector((state) => state.orderDetails.error);
+    const allOrdersError = useSelector((state) => state.allOrders.error);
+    const orderEditError = useSelector((state) => state.orderEdit.error);
 
     const timer = React.useRef();
 
@@ -69,6 +73,42 @@ const Alert = () => {
             }, 4000);
         }
     }, [newOrderError, dispatch]);
+    React.useEffect(() => {
+        if (myOrdersError) {
+            setShowAlert(myOrdersError);
+            dispatch({ type: "CLEAR_ERRORS" });
+            timer.current = setTimeout(() => {
+                setShowAlert(false);
+            }, 4000);
+        }
+    }, [myOrdersError, dispatch]);
+    React.useEffect(() => {
+        if (orderDetailsError) {
+            setShowAlert(orderDetailsError);
+            dispatch({ type: "CLEAR_ERRORS" });
+            timer.current = setTimeout(() => {
+                setShowAlert(false);
+            }, 4000);
+        }
+    }, [orderDetailsError, dispatch]);
+    React.useEffect(() => {
+        if (allOrdersError) {
+            setShowAlert(allOrdersError);
+            dispatch({ type: "CLEAR_ERRORS" });
+            timer.current = setTimeout(() => {
+                setShowAlert(false);
+            }, 4000);
+        }
+    }, [allOrdersError, dispatch]);
+    React.useEffect(() => {
+        if (orderEditError) {
+            setShowAlert(orderEditError);
+            dispatch({ type: "CLEAR_ERRORS" });
+            timer.current = setTimeout(() => {
+                setShowAlert(false);
+            }, 4000);
+        }
+    }, [orderEditError, dispatch]);
 
     React.useEffect(() => {
         timer.current = setTimeout(() => {

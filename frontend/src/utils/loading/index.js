@@ -12,6 +12,10 @@ const Loading = () => {
     );
     const forgotPassLoad = useSelector((state) => state.forgotPassword.loading);
     const newOrderLoad = useSelector((state) => state.newOrder.loading);
+    const myOrdersLoad = useSelector((state) => state.myOrders.loading);
+    const orderDetailsLoad = useSelector((state) => state.orderDetails.loading);
+    const allOrdersLoad = useSelector((state) => state.allOrders.loading);
+    const orderEditLoad = useSelector((state) => state.orderEdit.loading);
 
     React.useEffect(() => {
         if (
@@ -20,7 +24,11 @@ const Loading = () => {
             productsLoad ||
             productDetailsLoad ||
             forgotPassLoad ||
-            newOrderLoad
+            newOrderLoad ||
+            myOrdersLoad ||
+            orderDetailsLoad ||
+            allOrdersLoad ||
+            orderEditLoad
         ) {
             setLoading(true);
         } else {
@@ -33,6 +41,10 @@ const Loading = () => {
         productDetailsLoad,
         forgotPassLoad,
         newOrderLoad,
+        myOrdersLoad,
+        orderDetailsLoad,
+        allOrdersLoad,
+        orderEditLoad,
     ]);
 
     return (
