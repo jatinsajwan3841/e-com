@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
+import Rating from "@mui/material/Rating";
 import "./index.scss";
 
 const Card = ({ props }) => {
@@ -7,13 +7,14 @@ const Card = ({ props }) => {
         <Link to={`/product/${props._id}`} className="card-container">
             <img src={props.images[0].url} alt={props.name} />
             <p>{props.name}</p>
+
             <div className="star-rev">
-                <ReactStars
-                    activeColor="tomato"
-                    isHalf={true}
-                    edit={false}
-                    size={20}
+                <Rating
+                    name="read-only"
                     value={props.ratings}
+                    precision={0.5}
+                    size="small"
+                    readOnly
                 />{" "}
                 <span>({props.numOfReviews} reviews)</span>
             </div>

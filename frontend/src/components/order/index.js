@@ -97,9 +97,7 @@ const Order = () => {
                                     <span className="price">{`₹${order.tax}`}</span>
                                 </div>
                                 <div>
-                                    <span className="title">
-                                        Shipping Charges:
-                                    </span>
+                                    <span className="title">Shipping:</span>
                                     <span className="price">{`₹${order.shippingCharges}`}</span>
                                 </div>
                             </div>

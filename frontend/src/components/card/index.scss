@@ -17,10 +17,8 @@
     .star-rev {
         display: flex;
         align-items: center;
-        flex-direction: row;
-        span:last-child {
-            margin: 0 0 0 10px;
-        }
+        flex-flow: row wrap;
+        padding-bottom: 5px;
     }
     .price {
         color: tomato;

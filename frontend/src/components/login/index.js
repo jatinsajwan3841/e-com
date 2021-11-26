@@ -63,24 +63,25 @@ const Login = () => {
                 Let's set go <span className="high">╰(*°▽°*)╯</span>{" "}
             </h3>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <label>
-                    {loginSelect ? (
-                        <div className="avatar" />
-                    ) : (
-                        <>
-                            <div className="avatar">
-                                {dp && <img className="dp" alt="dp" src={dp} />}
+                {loginSelect ? (
+                    <div className="avatar" />
+                ) : (
+                    <>
+                        <div className="avatar">
+                            {dp && <img className="dp" alt="dp" src={dp} />}
+                            <label>
                                 <span className="upload" />
-                            </div>
-                            <input
-                                type="file"
-                                name="dp"
-                                accept=".jpeg,.jpg,.png"
-                                onChange={handleDp}
-                            />
-                        </>
-                    )}
-                </label>
+                                <input
+                                    type="file"
+                                    name="dp"
+                                    accept=".jpeg,.jpg,.png"
+                                    onChange={handleDp}
+                                />
+                            </label>
+                        </div>
+                    </>
+                )}
+
                 {!loginSelect && (
                     <div className="inp-content">
                         <label htmlFor="name" className="label">

@@ -7,15 +7,24 @@ import SecureRoute from "./utils/secureRoute";
 import routes from "./Routes";
 import "./App.css";
 import NoMatch from "./components/layout/404";
-import { loadUser } from "./actions/userAction";
 import store from "./store";
 import Alert from "./utils/alert";
 import Loading from "./utils/loading";
 import MetaData from "./utils/metaData";
+import axios from "./utils/axiosConfig";
 
 function App() {
     React.useEffect(() => {
-        store.dispatch(loadUser());
+        const loadUser = async () => {
+            try {
+                const { data } = await axios.get(`/api/v1/profile`);
+                store.dispatch({
+                    type: "LOAD_USER_SUCCESS",
+                    payload: data.user,
+                });
+            } catch {}
+        };
+        loadUser();
     }, []);
 
     const menu = routes.map((route, index) => (
@@ -38,20 +47,20 @@ function App() {
         />
     ));
     return (
-        <Suspense fallback={<Loader />}>
-            <div className="app">
-                <Header />
-                <Alert />
-                <Loading />
-                <div className="content">
+        <div className="app">
+            <Header />
+            <Alert />
+            <Loading />
+            <div className="content">
+                <Suspense fallback={<Loader />}>
                     <Routes>
                         {menu}
                         <Route path="*" element={<NoMatch />} />
                     </Routes>
-                </div>
-                <Footer />
+                </Suspense>
             </div>
-        </Suspense>
+            <Footer />
+        </div>
     );
 }
 

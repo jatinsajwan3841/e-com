@@ -82,16 +82,17 @@
             &::after {
                 content: "+";
                 position: absolute;
-                left: 5.5px;
-                top: -5px;
+                left: 7.7px;
+                top: -2px;
                 font-size: 25px;
                 font-weight: bold;
                 color: rgb(160, 149, 149);
             }
+            & + input {
+                display: none;
+            }
         }
-        & + input {
-            display: none;
-        }
+
         &::before {
             content: "";
             display: block;

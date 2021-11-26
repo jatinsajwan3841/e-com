@@ -3,7 +3,7 @@ import MetaData from "../../utils/metaData";
 import { getProductDetails } from "../../actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
+import Rating from "@mui/material/Rating";
 import "./index.scss";
 import { addItemsToCart } from "../../actions/cartActions";
 
@@ -46,12 +46,11 @@ const Product = () => {
                                 </div>
                             </div>
                             <div className="details">
-                                <ReactStars
-                                    activeColor="tomato"
-                                    isHalf={true}
-                                    edit={false}
-                                    size={20}
+                                <Rating
+                                    name="read-only"
                                     value={product.ratings}
+                                    precision={0.5}
+                                    readOnly
                                 />
                             </div>
                             <div className="details">
@@ -109,12 +108,12 @@ const Product = () => {
                                             {val.name}
                                         </div>
                                         <div>
-                                            <ReactStars
-                                                activeColor="tomato"
-                                                isHalf={true}
-                                                edit={false}
-                                                size={20}
+                                            <Rating
+                                                name="read-only"
                                                 value={val.rating}
+                                                precision={0.5}
+                                                size="small"
+                                                readOnly
                                             />
                                         </div>
                                         <div className="comment">
