@@ -1,11 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addItemsToCart, removeCartItem } from "../../actions/cartActions";
 
 const CartItem = ({ prod }) => {
     const [count, setCount] = React.useState(prod.quantity);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         if (count !== prod.quantity) {
@@ -15,7 +17,10 @@ const CartItem = ({ prod }) => {
 
     return (
         <div className="cart-item">
-            <span className="prod">
+            <span
+                className="prod"
+                onClick={() => navigate(`/product/${prod._id}`)}
+            >
                 <img src={prod.image} className="prod-img" alt={prod.name} />
                 <span className="prod-details">
                     <span className="prod-name">{prod.name}</span>
@@ -25,7 +30,10 @@ const CartItem = ({ prod }) => {
                     </span>
                     <span
                         className="remove"
-                        onClick={() => dispatch(removeCartItem(prod._id))}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            dispatch(removeCartItem(prod._id));
+                        }}
                     >
                         Remove
                     </span>

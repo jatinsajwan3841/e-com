@@ -1,0 +1,30 @@
+.order-container {
+    display: flex;
+    flex-flow: column wrap;
+    overflow: auto;
+    font-size: 18px;
+    .base {
+        display: flex;
+        flex-flow: column wrap;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 1px teal;
+        .title {
+            font-size: 19px;
+            font-weight: bold;
+        }
+    }
+    .order-id {
+        font-size: 25px;
+        font-weight: bold;
+        margin: 10px;
+        color: teal;
+    }
+    .order-item {
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+}

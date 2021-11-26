@@ -9,7 +9,8 @@ const ForgotPass = React.lazy(() => import("./components/forgotPass"));
 const ResetPass = React.lazy(() => import("./components/resetPass"));
 const Cart = React.lazy(() => import("./components/cart"));
 const CheckOut = React.lazy(() => import("./components/checkOutSteps"));
-const PayStatus = React.lazy(() => import("./components/paymentStatus"));
+const Orders = React.lazy(() => import("./components/orders"));
+const Order = React.lazy(() => import("./components/order"));
 
 const routes = [
     {
@@ -73,10 +74,16 @@ const routes = [
         element: CheckOut,
     },
     {
-        path: "/pay-status",
-        name: "PayStatus",
-        secure: false,
-        element: PayStatus,
+        path: "/orders",
+        name: "Orders",
+        secure: true,
+        element: Orders,
+    },
+    {
+        path: "/order/:id",
+        name: "OrderDetails",
+        secure: true,
+        element: Order,
     },
 ];
 

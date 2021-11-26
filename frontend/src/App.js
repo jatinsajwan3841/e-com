@@ -11,6 +11,7 @@ import { loadUser } from "./actions/userAction";
 import store from "./store";
 import Alert from "./utils/alert";
 import Loading from "./utils/loading";
+import MetaData from "./utils/metaData";
 
 function App() {
     React.useEffect(() => {
@@ -28,7 +29,10 @@ function App() {
                         <route.element />
                     </SecureRoute>
                 ) : (
-                    <route.element />
+                    <>
+                        <MetaData title={route.name} />
+                        <route.element />
+                    </>
                 )
             }
         />

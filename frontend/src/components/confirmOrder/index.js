@@ -5,17 +5,19 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../../utils/axiosConfig";
 import "./index.scss";
 import { createOrder } from "../../actions/orderActions";
+import Loader from "../layout/loader";
 
-const ConfirmOrder = ({ setStep }) => {
+const ConfirmOrder = () => {
+    const [tranxInProcess, setTranxInProcess] = React.useState(false);
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const uid = React.useRef();
 
     const uidGen = () => {
         return Date.now().toString(36) + Math.random().toString(36).substr(2);
     };
+    const uid = React.useRef(uidGen());
 
     const subtotal = cartItems.reduce(
         (acc, item) => acc + item.quantity * item.price,
@@ -27,6 +29,7 @@ const ConfirmOrder = ({ setStep }) => {
     const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
     const proceedHandler = () => {
+        setTranxInProcess(true);
         const sessionData = {
             subtotal,
             shippingCharges,
@@ -67,6 +70,13 @@ const ConfirmOrder = ({ setStep }) => {
             },
             handler: {
                 notifyMerchant: function (eventName, data) {
+                    if (eventName === "APP_CLOSED") {
+                        setTranxInProcess(false);
+                    }
+                    if (eventName === "PAYMENT_ERROR") {
+                        setTranxInProcess(false);
+                        window.Paytm.CheckoutJS.close();
+                    }
                     console.log("notifyMerchant handler function called");
                     console.log("eventName => ", eventName);
                     console.log("data => ", data);
@@ -77,23 +87,24 @@ const ConfirmOrder = ({ setStep }) => {
                         alert("Payment Successfull");
                         const paymentInfo = {
                             txn_id: paymentStatus.TXNID,
-                            txnStatus: paymentStatus.TXNDATE,
+                            txnStatus: paymentStatus.STATUS,
                             txnDate: paymentStatus.TXNDATE,
                             gatewayName: paymentStatus.GATEWAYNAME,
                             txnMode: paymentStatus.PAYMENTMODE,
                         };
                         dispatch(createOrder(paymentInfo));
-                        localStorage.removeItem("cartItems");
-                        sessionStorage.removeItem("uid");
-                        sessionStorage.removeItem("orderInfo");
-                        navigate("/");
-                        window.location.reload();
+                        window.Paytm.CheckoutJS.close();
+                        setTranxInProcess(false);
+                        navigate("/orders");
                     } else if (paymentStatus.RESPCODE === "400") {
                         alert("Payment Pending");
-                        window.location.reload();
+                        window.Paytm.CheckoutJS.close();
+                        setTranxInProcess(false);
                     } else {
                         alert(paymentStatus.RESPMSG);
-                        window.location.reload();
+                        window.Paytm.CheckoutJS.close();
+                        setTranxInProcess(false);
+                        uid.current = uidGen();
                     }
                 },
             },
@@ -107,94 +118,92 @@ const ConfirmOrder = ({ setStep }) => {
                     window.Paytm.CheckoutJS.invoke();
                 })
                 .catch(function onError(error) {
+                    alert("oops something went wrong, try again!");
+                    setTranxInProcess(false);
+                    uid.current = uidGen();
                     console.log("error => ", error);
                 });
         }
     };
 
-    React.useEffect(() => {
-        if (sessionStorage.getItem("uid")) {
-            uid.current = sessionStorage.getItem("uid");
-        } else {
-            uid.current = uidGen();
-            sessionStorage.setItem("uid", uid.current);
-        }
-    }, []);
-
     return (
-        <div className="confirm-container">
-            <MetaData title="Confirm Order" />
-            <div className="left">
-                <span className="title">Shipping Info</span>
-                <div className="shipping-info-box">
-                    <div className="shipping-info-item">
-                        <p>
-                            Name: {` `}
-                            <span>{user.name}</span>
-                        </p>
+        <>
+            {tranxInProcess && <Loader />}
+            <div className="confirm-container">
+                <MetaData title="Confirm Order" />
+                <div className="left">
+                    <span className="title">Shipping Info</span>
+                    <div className="shipping-info-box">
+                        <div className="shipping-info-item">
+                            <p>
+                                Name: {` `}
+                                <span>{user.name}</span>
+                            </p>
+                        </div>
+                        <div className="shipping-info-item">
+                            <p>
+                                Phone: {` `}
+                                <span>{shippingInfo.phoneNumber}</span>
+                            </p>
+                        </div>
+                        <div className="shipping-info-item">
+                            <p>
+                                Address: {` `}
+                                <span>{address}</span>
+                            </p>
+                        </div>
                     </div>
-                    <div className="shipping-info-item">
-                        <p>
-                            Phone: {` `}
-                            <span>{shippingInfo.phoneNumber}</span>
-                        </p>
-                    </div>
-                    <div className="shipping-info-item">
-                        <p>
-                            Address: {` `}
-                            <span>{address}</span>
-                        </p>
-                    </div>
-                </div>
-                <div className="cart-items-container">
-                    <div className="title">Your Cart Items:</div>
-                    {cartItems &&
-                        cartItems.map((item, i) => (
-                            <Link to={`/product/${item._id}`} key={i}>
-                                <div className="cart-items">
-                                    <img src={item.image} alt="Product" />
+                    <div className="cart-items-container">
+                        <div className="title">Your Cart Items:</div>
+                        {cartItems &&
+                            cartItems.map((item, i) => (
+                                <Link to={`/product/${item._id}`} key={i}>
+                                    <div className="cart-items">
+                                        <img src={item.image} alt="Product" />
 
-                                    {item.name}
-                                    <span>
-                                        {item.quantity} X ₹{item.price} ={" "}
-                                        <b>₹{item.price * item.quantity}</b>
-                                    </span>
-                                </div>
-                            </Link>
-                        ))}
+                                        {item.name}
+                                        <span>
+                                            {item.quantity} X ₹{item.price} ={" "}
+                                            <b>₹{item.price * item.quantity}</b>
+                                        </span>
+                                    </div>
+                                </Link>
+                            ))}
+                    </div>
+                </div>
+                <div className="right">
+                    <div className="title"> Order Summary</div>
+                    <div>
+                        <div className="order-summary">
+                            <p>Subtotal:</p>
+                            <span>₹{subtotal}</span>
+                        </div>
+                        <div className="order-summary">
+                            <p>Shipping Charges:</p>
+                            <span>₹{shippingCharges}</span>
+                        </div>
+                        <div className="order-summary">
+                            <p>GST:</p>
+                            <span>₹{tax}</span>
+                        </div>
+                    </div>
+                    <div className="order-summary total">
+                        <p>
+                            <b>Total:</b>
+                        </p>
+                        <span>₹{totalPrice}</span>
+                    </div>
+                    <button
+                        type="button"
+                        className="proceed"
+                        onClick={proceedHandler}
+                        disabled={tranxInProcess}
+                    >
+                        Proceed to payment
+                    </button>
                 </div>
             </div>
-            <div className="right">
-                <div className="title"> Order Summary</div>
-                <div>
-                    <div className="order-summary">
-                        <p>Subtotal:</p>
-                        <span>₹{subtotal}</span>
-                    </div>
-                    <div className="order-summary">
-                        <p>Shipping Charges:</p>
-                        <span>₹{shippingCharges}</span>
-                    </div>
-                    <div className="order-summary">
-                        <p>GST:</p>
-                        <span>₹{tax}</span>
-                    </div>
-                </div>
-                <div className="order-summary total">
-                    <p>
-                        <b>Total:</b>
-                    </p>
-                    <span>₹{totalPrice}</span>
-                </div>
-                <button
-                    type="button"
-                    className="proceed"
-                    onClick={proceedHandler}
-                >
-                    Proceed to payment
-                </button>
-            </div>
-        </div>
+        </>
     );
 };
 

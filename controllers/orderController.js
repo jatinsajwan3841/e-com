@@ -33,7 +33,7 @@ exports.newOrder = asyncErrorHandle(async (req, res, next) => {
     });
 });
 
-// get single order
+// get single order --admin
 exports.getOrderDetails = asyncErrorHandle(async (req, res, next) => {
     const order = await Order.findById(req.params.id).populate(
         "user",
@@ -48,13 +48,33 @@ exports.getOrderDetails = asyncErrorHandle(async (req, res, next) => {
     });
 });
 
-// get logged user orders
-exports.myOrders = asyncErrorHandle(async (req, res, next) => {
-    const order = await Order.find({ user: req.user._id });
-
+// get single order -user
+exports.getUserOrderDetails = asyncErrorHandle(async (req, res, next) => {
+    const order = await Order.findById(req.params.id).populate(
+        "user",
+        "name email"
+    );
+    if (!order || order.user !== req.user._id) {
+        return next(
+            new ErrorHandler(
+                "No order found with given ID or Unauthorized Access",
+                404
+            )
+        );
+    }
     res.status(200).json({
         success: true,
         order,
+    });
+});
+
+// get logged user orders
+exports.myOrders = asyncErrorHandle(async (req, res, next) => {
+    const orders = await Order.find({ user: req.user._id });
+
+    res.status(200).json({
+        success: true,
+        orders,
     });
 });
 

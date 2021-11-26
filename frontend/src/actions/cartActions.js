@@ -29,7 +29,7 @@ export const removeCartItem = (prod_id) => (dispatch, getState) => {
     );
 };
 
-// save shiiping info
+// save shipping info
 export const saveShippingInfo = (data) => async (dispatch) => {
     dispatch({
         type: "SAVE_SHIPPING_INFO",

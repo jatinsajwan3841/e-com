@@ -8,7 +8,7 @@ import "./index.scss";
 import { addItemsToCart } from "../../actions/cartActions";
 
 const Product = () => {
-    const [count, setCount] = React.useState(0);
+    const [count, setCount] = React.useState(1);
     const dispatch = useDispatch();
     const params = useParams();
     const { product } = useSelector((state) => state.productDetails);
@@ -16,6 +16,7 @@ const Product = () => {
     const cartHandler = () => {
         if (count) {
             dispatch(addItemsToCart(product, count));
+            alert("Product added to cart!");
         }
     };
 
@@ -66,7 +67,7 @@ const Product = () => {
                                     >
                                         -
                                     </button>
-                                    {count}
+                                    {product.stock > 0 ? count : 0}
                                     <button
                                         onClick={() =>
                                             setCount((prev) => prev + 1)

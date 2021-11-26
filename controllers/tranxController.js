@@ -18,7 +18,7 @@ exports.initTranx = asyncErrorHandle(async (req, res, next) => {
         mid: process.env.PAYTM_MID,
         websiteName: "WEBSTAGING",
         orderId: req.body.uid,
-        callbackUrl: "http://localhost:3000/#/pay-status?redirect=/pay-status",
+        callbackUrl: `${process.env.FRONTEND_URL}/orders`,
         txnAmount: {
             value: req.body.totalPrice,
             currency: "INR",
@@ -62,9 +62,4 @@ exports.initTranx = asyncErrorHandle(async (req, res, next) => {
     });
     post_req.write(post_data);
     post_req.end();
-});
-
-// callback
-exports.tranxStatus = asyncErrorHandle(async (req, res, next) => {
-    console.log(req);
 });

@@ -1,0 +1,27 @@
+.orders-container {
+    display: flex;
+    flex-flow: column wrap;
+    .title {
+        font-size: 50px;
+        font-weight: bold;
+        padding: 0 20px;
+        margin: 10px auto;
+        border-bottom: 2px dashed grey;
+    }
+    div {
+        outline: none !important;
+        a {
+            color: blue;
+        }
+    }
+    .MuiDataGrid-columnHeader {
+        background-color: tomato;
+        color: white;
+    }
+    .greenColor {
+        color: green;
+    }
+    .redColor {
+        color: red;
+    }
+}

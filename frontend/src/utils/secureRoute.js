@@ -7,7 +7,7 @@ const SecureRoute = ({ children }) => {
     const { loading, isAuthenticated } = useSelector((state) => state.user);
     const navigate = useNavigate();
     React.useEffect(() => {
-        if (!loading && !isAuthenticated) {
+        if (!loading && isAuthenticated === false) {
             navigate("/login");
         }
     }, [loading, isAuthenticated, navigate]);

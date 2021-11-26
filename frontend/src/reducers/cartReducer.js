@@ -33,6 +33,11 @@ export const cartReducer = (
                 ...state,
                 shippingInfo: action.payload,
             };
+        case "CLEAR_CART":
+            return {
+                ...state,
+                cartItems: [],
+            };
 
         default:
             return state;

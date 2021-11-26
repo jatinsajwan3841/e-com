@@ -7,11 +7,11 @@
     width: 100vw;
     background-color: rgba($color: #000000, $alpha: 0.4);
     .loading {
-        border: 5px solid transparent;
+        border: 3px solid transparent;
         border-radius: 50%;
-        border-top: 5px solid #dadada;
-        width: 120px;
-        height: 120px;
+        border-top: 3px solid #dadada;
+        width: 30px;
+        height: 30px;
         margin: auto;
         background-color: transparent;
         animation: spin 1s linear infinite;

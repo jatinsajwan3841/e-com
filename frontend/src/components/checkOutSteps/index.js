@@ -22,8 +22,7 @@ const CheckOutSteper = () => {
     return (
         <div className="check-out">
             {step === 0 && <Shipping setStep={setStep} />}
-            {step === 1 && <ConfirmOrder setStep={setStep} />}
-            {step === 2 && <Shipping setStep={setStep} />}
+            {step === 1 && <ConfirmOrder />}
             <div className="cont-btns">
                 {step !== 0 && (
                     <button
