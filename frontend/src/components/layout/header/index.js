@@ -56,7 +56,7 @@ const Header = () => {
                             />
                             <div className={`hidden ${open && "options"}`}>
                                 {user.role === "admin" && (
-                                    <Link to="/dashboard">Dashboard</Link>
+                                    <Link to="/admin/dashboard">Dashboard</Link>
                                 )}
                                 <Link to="/profile">Profile</Link>
                                 <Link to="/orders">Orders</Link>

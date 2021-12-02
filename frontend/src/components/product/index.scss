@@ -4,6 +4,18 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px;
+    button {
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 10px;
+        margin: 0 10px;
+        background-color: grey;
+        &:disabled {
+            color: rgb(68, 68, 68);
+        }
+    }
     .product-image-holder {
         display: flex;
         justify-content: center;
@@ -45,18 +57,6 @@
                 margin: 10px 0;
                 align-items: center;
                 width: max-content;
-                button {
-                    cursor: pointer;
-                    border: none;
-                    border-radius: 5px;
-                    color: white;
-                    padding: 10px;
-                    margin: 0 10px;
-                    background-color: grey;
-                    &:disabled {
-                        color: rgb(68, 68, 68);
-                    }
-                }
                 .add-to-cart {
                     background-color: tomato;
                 }
@@ -66,6 +66,9 @@
             }
             .tomato {
                 color: tomato;
+            }
+            .submit-review {
+                background-color: tomato;
             }
         }
     }
@@ -115,6 +118,22 @@
             margin: 10px;
             color: grey;
             font-size: large;
+        }
+    }
+}
+
+.dialog {
+    display: flex;
+    flex-flow: column wrap;
+    .dialog-text {
+        display: block;
+        min-width: 25vw;
+        border: 1.5px dashed black;
+        border-radius: 10px;
+        margin-top: 8px;
+        padding: 5px;
+        &:focus {
+            outline: none;
         }
     }
 }

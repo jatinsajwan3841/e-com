@@ -7,7 +7,13 @@ import {
     orderDetailsReducer,
     orderEditReducer,
 } from "./orderReducer";
-import { productReducer, productDetailsReducer } from "./productReducer";
+import {
+    productReducer,
+    productDetailsReducer,
+    newReviewReducer,
+    productReviewsReducer,
+    reviewReducer,
+} from "./productReducer";
 import {
     forgotPasswordReducer,
     profileReducer,
@@ -26,6 +32,9 @@ const rootReducer = combineReducers({
     orderDetails: orderDetailsReducer,
     allOrders: allOrdersReducer,
     orderEdit: orderEditReducer,
+    newReview: newReviewReducer,
+    productReviews: productReviewsReducer,
+    review: reviewReducer,
 });
 
 export default rootReducer;

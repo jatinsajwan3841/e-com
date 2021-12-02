@@ -19,14 +19,16 @@ const Products = () => {
     const [applyFilter, setApplyFilter] = React.useState(false);
     const dispatch = useDispatch();
     const params = useParams();
-    const { products, productsCount, resultPerPage, filteredProductsCount } =
-        useSelector((state) => state.products);
+    const { products, productsCount, resultPerPage } = useSelector(
+        (state) => state.products
+    );
 
     React.useEffect(() => {
         dispatch(
             getProduct(params.keyword, currentPage, price, category, ratings)
         );
-    }, [dispatch, params, currentPage, applyFilter, price, category, ratings]);
+        // eslint-disable-next-line
+    }, [dispatch, params, currentPage, applyFilter]);
 
     return (
         <div className="products-container">
@@ -86,7 +88,7 @@ const Products = () => {
                     </div>
                 </div>
             </div>
-            {resultPerPage <= filteredProductsCount && (
+            {productsCount > 7 && (
                 <div className="paginationBox">
                     <Pagination
                         activePage={currentPage}

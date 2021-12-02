@@ -4,7 +4,9 @@ import { myOrders } from "../../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NextWeekRoundedIcon from "@mui/icons-material/NextWeekRounded";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import "./index.scss";
+import "../cart/index.scss";
 
 const Orders = () => {
     const dispatch = useDispatch();
@@ -59,7 +61,7 @@ const Orders = () => {
     const rows = [];
 
     orders &&
-        orders.forEach((item, index) => {
+        orders.forEach((item) => {
             rows.push({
                 itemsQty: item.orderItems.length,
                 id: item._id,
@@ -74,14 +76,26 @@ const Orders = () => {
     return (
         <div className="orders-container">
             <div className="title">Orders</div>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
-                disableSelectionOnClick
-                autoHeight
-            />
+            {rows.length === 0 ? (
+                <div className="empty-cart">
+                    <RemoveShoppingCartIcon className="icon" /> uh oh, let's add
+                    something to the cart!
+                    <Link to="/products">
+                        <button type="button" className="return">
+                            View Products
+                        </button>
+                    </Link>
+                </div>
+            ) : (
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
+                    disableSelectionOnClick
+                    autoHeight
+                />
+            )}
         </div>
     );
 };

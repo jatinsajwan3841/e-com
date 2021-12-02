@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../card";
-import MetaData from "../../utils/metaData";
 import { getProduct } from "../../actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
@@ -13,7 +12,6 @@ const Home = () => {
     }, [dispatch]);
     return (
         <>
-            <MetaData title="Flip Outlet" />
             <div className="home">
                 <div className="top">
                     <div className="divide first">

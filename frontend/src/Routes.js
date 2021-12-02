@@ -11,11 +11,12 @@ const Cart = React.lazy(() => import("./components/cart"));
 const CheckOut = React.lazy(() => import("./components/checkOutSteps"));
 const Orders = React.lazy(() => import("./components/orders"));
 const Order = React.lazy(() => import("./components/order"));
+const Dashboard = React.lazy(() => import("./components/dashboard"));
 
 const routes = [
     {
         path: "/",
-        name: "Home Page",
+        name: "Home",
         secure: false,
         element: Home,
     },
@@ -84,6 +85,13 @@ const routes = [
         name: "OrderDetails",
         secure: true,
         element: Order,
+    },
+    {
+        path: "/admin/dashboard",
+        name: "Dashboard",
+        secure: true,
+        isAdmin: true,
+        element: Dashboard,
     },
 ];
 

@@ -22,7 +22,11 @@ function App() {
                     type: "LOAD_USER_SUCCESS",
                     payload: data.user,
                 });
-            } catch {}
+            } catch {
+                store.dispatch({
+                    type: "LOAD_USER_FAIL",
+                });
+            }
         };
         loadUser();
     }, []);
@@ -34,7 +38,7 @@ function App() {
             name={route.name}
             element={
                 route.secure ? (
-                    <SecureRoute>
+                    <SecureRoute isAdmin={route.isAdmin}>
                         <route.element />
                     </SecureRoute>
                 ) : (
