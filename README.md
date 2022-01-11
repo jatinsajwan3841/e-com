@@ -12,22 +12,6 @@ This is a full stack end to end E-Com. web app including role based authenticati
 
 -   and many more
 
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is \*actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
-
 ## Tech
 
 In overview, Flip Outlet uses these tools with many open source libraries inside:
@@ -35,7 +19,7 @@ In overview, Flip Outlet uses these tools with many open source libraries inside
 -   [MongoDB] - NoSQL database program, uses JSON-like documents with optional schemas.
 -   [Express] - Minimal and flexible Node.js web application framework.
 -   [ReactJS] - A JavaScript library for building user interfaces.
--   [node.js] - JavaScript runtime environment that runs on the V8 engine.
+-   [Node.js] - JavaScript runtime environment that runs on the V8 engine.
 
 ## Installation
 
