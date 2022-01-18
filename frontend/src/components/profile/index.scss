@@ -32,6 +32,9 @@
                 object-fit: scale-down;
             }
             .upload {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 position: absolute;
                 left: 60px;
                 bottom: 15px;
@@ -45,9 +48,6 @@
                 cursor: pointer;
                 &::after {
                     content: "+";
-                    position: absolute;
-                    left: 7.7px;
-                    top: -2px;
                     font-size: 25px;
                     font-weight: bold;
                     color: rgb(160, 149, 149);

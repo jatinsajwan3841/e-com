@@ -5,6 +5,8 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.G_CID);
 
 // registration
 exports.registerUser = asyncErrorHandle(async (req, res, next) => {
@@ -41,6 +43,38 @@ exports.loginUser = asyncErrorHandle(async (req, res, next) => {
         return next(new ErrorHandler("Invalid email or password", 401));
     }
     sendToken(user, 200, res);
+});
+
+// continue with google
+exports.continueWithGoogle = asyncErrorHandle(async (req, res, next) => {
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.G_CID,
+    });
+    const payload = ticket.getPayload();
+    const user = await User.findOne({ email: payload["email"] });
+    if (!user) {
+        const myCloud = await cloudinary.v2.uploader.upload(
+            payload["picture"],
+            {
+                folder: "avatars",
+                width: 150,
+                crop: "scale",
+            }
+        );
+        const data = {
+            name: payload["name"],
+            email: payload["email"],
+            avatar: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url,
+            },
+        };
+        const opts = { validateBeforeSave: false };
+        const newUser = await User(data).save(opts);
+        sendToken(newUser, 200, res);
+    } else sendToken(user, 200, res);
 });
 
 // logout
@@ -126,9 +160,11 @@ exports.getUserDetails = asyncErrorHandle(async (req, res, next) => {
 // update userPass
 exports.updatePassword = asyncErrorHandle(async (req, res, next) => {
     const user = await User.findById(req.user.id).select("+password");
-    const isPassMatched = await user.comparePassword(req.body.oldPassword);
-    if (!isPassMatched) {
-        return next(new ErrorHandler("Old password is incorrect", 400));
+    if (user["password"] !== undefined) {
+        const isPassMatched = await user.comparePassword(req.body.oldPassword);
+        if (!isPassMatched) {
+            return next(new ErrorHandler("Old password is incorrect", 400));
+        }
     }
     if (req.body.newPassword !== req.body.confirmPassword) {
         return next(new ErrorHandler("Password not matched", 400));

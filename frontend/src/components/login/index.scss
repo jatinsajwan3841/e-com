@@ -51,6 +51,9 @@
             display: block;
             font-weight: lighter;
         }
+        .gid {
+            margin: 20px;
+        }
     }
     .avatar {
         position: relative;
@@ -68,6 +71,9 @@
             border-radius: 50%;
         }
         .upload {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: absolute;
             right: 4px;
             bottom: 4px;
@@ -81,9 +87,6 @@
             cursor: pointer;
             &::after {
                 content: "+";
-                position: absolute;
-                left: 7.7px;
-                top: -2px;
                 font-size: 25px;
                 font-weight: bold;
                 color: rgb(160, 149, 149);

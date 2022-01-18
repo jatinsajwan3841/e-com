@@ -47,6 +47,13 @@ const Login = () => {
         if (isAuthenticated) {
             navigate(redirect, { replace: true });
         }
+        window.google.accounts.id.renderButton(document.getElementById("gid"), {
+            size: "large",
+            type: "standard",
+            shape: "pill",
+            text: "continue_with",
+            logo_alignment: "left",
+        });
     }, [isAuthenticated, navigate, redirect]);
     return (
         <div className="login-container">
@@ -61,6 +68,10 @@ const Login = () => {
             </div>
             <h3 className="start">
                 Let's set go <span className="high">╰(*°▽°*)╯</span>{" "}
+                <center>
+                    <div className="gid" id="gid" />
+                    OR
+                </center>
             </h3>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 {loginSelect ? (

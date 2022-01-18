@@ -12,12 +12,14 @@ const {
     getSingleUser,
     updateUserRole,
     deleteUser,
+    continueWithGoogle,
 } = require("../controllers/userController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
 
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
+router.route("/continue/google").post(continueWithGoogle);
 router.route("/profile").get(isAuthenticatedUser, getUserDetails);
 router.route("/profile/update").put(isAuthenticatedUser, updateProfile);
 router.route("/password/update").put(isAuthenticatedUser, updatePassword);

@@ -12,8 +12,32 @@ import Alert from "./utils/alert";
 import Loading from "./utils/loading";
 import MetaData from "./utils/metaData";
 import axios from "./utils/axiosConfig";
+import { useSelector } from "react-redux";
 
 function App() {
+    const { isAuthenticated } = useSelector((state) => state.user);
+    const isAuthenticatedRef = React.useRef(isAuthenticated);
+    const handleCredentialResponse = async (response) => {
+        try {
+            const { data } = await axios.post(`/api/v1/continue/google`, {
+                token: response.credential,
+            });
+            store.dispatch({
+                type: "LOGIN_SUCCESS",
+                payload: data.user,
+            });
+        } catch (error) {
+            store.dispatch({
+                type: "LOGIN_FAIL",
+                payload: error.response.data.message,
+            });
+        }
+    };
+
+    React.useEffect(() => {
+        isAuthenticatedRef.current = isAuthenticated;
+    }, [isAuthenticated]);
+
     React.useEffect(() => {
         const loadUser = async () => {
             try {
@@ -29,6 +53,20 @@ function App() {
             }
         };
         loadUser();
+        window.onload = () => {
+            window.google.accounts.id.initialize({
+                client_id:
+                    "685022877822-39l48c8ii774fbagg5ooot7ru6lmg03k.apps.googleusercontent.com",
+                callback: handleCredentialResponse,
+                context: "use",
+                ux_mode: "popup",
+                auto_select: "true",
+            });
+            setTimeout(() => {
+                if (!isAuthenticatedRef.current)
+                    window.google.accounts.id.prompt();
+            }, 4000);
+        };
     }, []);
 
     const menu = routes.map((route, index) => (
