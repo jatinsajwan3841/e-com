@@ -24,7 +24,7 @@ In overview, Flip Outlet uses these tools with many open source libraries inside
 ## Installation
 
 Node and MongoDB must be installed on your system.  
-Also for production, you need to have accounts on MongoDB atlas, Heroku, GitHub, Email-provider, Cloudinary, PayTm.
+Also for production, you need to have accounts on MongoDB atlas, ~~Heroku~~ render, GitHub, Email-provider, Cloudinary, PayTm.
 
 Firstly change directory to _e-com/config_ and create a _config.env_ file.  
 Inside this file you have to configure the environment variables required which are mentioned.
@@ -76,5 +76,5 @@ npm i
 npm start
 ```
 
-For production, I have used Heroku for backend API server and github pages for frontend deployments.  
-If you are also using Heroku, then you need to create these environment variables inside _settings/Config Vars_ and link your github repo if repo available on github.
+For production, I have used ~~Heroku~~ render for backend API server and github pages for frontend deployments.  
+If you are also using ~~Heroku~~ render, then you need to create these environment variables on ~~settings/Config Vars~~ _render_ environment and link your github repo if repo available on github.
